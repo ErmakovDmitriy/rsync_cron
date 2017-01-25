@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "demonihin@gmail.com",
   "summary": "rsync crontabl client",
-  "license": "Apache-2.0",
+  "license": "GNU General Public License v3.0",
   "source": "https://github.com/ErmakovDmitriy/rsync_cron",
   "project_page": "https://github.com/ErmakovDmitriy/rsync_cron",
   "issues_url": "https://github.com/ErmakovDmitriy/rsync_cron/issues",
