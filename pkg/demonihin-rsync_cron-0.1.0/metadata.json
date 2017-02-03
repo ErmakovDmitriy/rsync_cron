@@ -2,16 +2,13 @@
   "name": "demonihin-rsync_cron",
   "version": "0.1.0",
   "author": "demonihin@gmail.com",
-  "summary": "rsync crontab client",
+  "summary": "rsync crontabl client",
   "license": "GNU General Public License v3.0",
   "source": "https://github.com/ErmakovDmitriy/rsync_cron",
   "project_page": "https://github.com/ErmakovDmitriy/rsync_cron",
   "issues_url": "https://github.com/ErmakovDmitriy/rsync_cron/issues",
   "dependencies": [
-      {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
-      {"name":"themeier-rsync","version_requirement":">=0.6.0"},
-      {"name": "rmueller-cron","version_requirement":">=0.2.0"}
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ],
   "data_provider": null
 }
-

@@ -1,0 +1,12 @@
+{
+  "Gemfile": "36c376f27539ded2a321b2bd432e843b",
+  "LICENSE": "84dcc94da3adb52b53ae4fa38fe49e5d",
+  "README.md": "3c950567cff6c097bf0ab38c7e5f0e65",
+  "Rakefile": "f4692851f7e9afcdb02721319e3f18b9",
+  "examples/init.pp": "dc2f63cb27a889c82c0ba5de29b25cb9",
+  "lib/facter/homedir_user.rb": "8ec4ee9844e87cfbf7ee42d19c8b61b2",
+  "manifests/init.pp": "0a4b08f2c42ac675b3435f9018ddc700",
+  "metadata.json": "b63cfa96333bba8f5e0b44e96db86569",
+  "spec/classes/init_spec.rb": "5a09e010f5e8837cfbc094098771fc30",
+  "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc"
+}

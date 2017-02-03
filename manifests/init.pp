@@ -1,48 +1,81 @@
 # Class: rsync_cron
 # ===========================
 #
-# Full description of class rsync_cron here.
+# rsync_cron - module which helps to create cron tasks on spoke servers or clients
+# to sync files from hub server (server which stores source files)
 #
-# Parameters
+# Created tasks use private SSH key to connect to server.
+# You should install SSH private key with your own hands
+#
+# Paramaters
 # ----------
-#
-# Document parameters here.
-#
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
-# Variables
-# ----------
-#
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# $package_name - package name which installs 'rsync' for current environment
+# $package_ensure - rsync package state like in 'package' resource
 #
 # Examples
 # --------
 #
-# @example
+# # sync files from server every midnight.
+# # Assumes, that another parameters are defaults
 #    class { 'rsync_cron':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#      package_ensure => 'latest',
 #    }
+#    rsync_cron::get { 'get_files_from_server_example':
+#      $source  = '/tmp/source_testfile',
+#      $host    = 'myhost.mydomain',
+#      $path    = '/tmp/destinatnion_testfile',
+#      $user    = 'myuser',
+#      $minute  = '0',
+#      $hour    = '0',
+#      $keyfile = '/root/.ssh/rsync_rsa',
+#    }
+# # Hiera:
+#    rsync_cron::gets:
+#      repo1:
+#        server:      '192.168.122.1'
+#        source:      '/tmp/source_testfile_repo2'
+#        keyfile:     '/home/dev/.ssh/id_rsa'
+#        user:        'dev'
+#        destination: '/tmp/destination_testfile_repo2'
+#        include:
+#          - '/tmp/include_1'
+#          - '/tmp/include_2'
+#        exclude:
+#          - '/tmp/exclude_1'
+#          - '/tmp/exclude_2'
+#        minute:       '0'
+#        purge:        true
+#        links:        true
+#        hardlinks:    true           
+#
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Ermakov Dmitriy <demonihin@gmail.com>
 #
 # Copyright
 # ---------
 #
-# Copyright 2017 Your name here, unless otherwise noted.
+# Copyright 2017 Dmitriy Ermakov
 #
+#
+
 class rsync_cron {
+  #Install rsync with defaults
+  include rsync
+  
+  $sync_jobs = lookup({
+    name => 'rsync_cron::gets',
+    value_type => Hash,
+    default_value => {},
+    })
 
-
+  notify {"rsync_jobs list: ${sync_jobs} ":withpath => true}
+  each($sync_jobs) |$name, $job| {
+    rsync_cron::get { $name:
+        * => $job
+    }
+    notify {"Job ID: ${job}": withpath => true}
+  }
 }
