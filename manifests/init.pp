@@ -61,21 +61,26 @@
 #
 #
 
-class rsync_cron {
-  #Install rsync with defaults
-  include rsync
-  
-  $sync_jobs = lookup({
-    name => 'rsync_cron::gets',
-    value_type => Hash,
-    default_value => {},
-    })
+class rsync_cron (
+  String $ssh_package_name = $rsync_cron::params::ssh_client_package_name,
+  ) inherits rsync_cron::params {
 
-  notify {"rsync_jobs list: ${sync_jobs} ":withpath => true}
-  each($sync_jobs) |$name, $job| {
-    rsync_cron::get { $name:
+    #Install rsync with defaults
+    include rsync
+    #Install ssh package with defaults - ghoneycutt-ssh
+    include ssh
+
+    $sync_jobs = lookup({
+      name => 'rsync_cron::gets',
+      value_type => Hash,
+      default_value => {},
+      })
+
+    #notify {"rsync_jobs list: ${sync_jobs} ":withpath => true}
+    each($sync_jobs) |$name, $job| {
+      rsync_cron::get { $name:
         * => $job
+      }
+      #notify {"Job ID: ${job}": withpath => true}
     }
-    notify {"Job ID: ${job}": withpath => true}
   }
-}

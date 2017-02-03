@@ -10,7 +10,8 @@
   "dependencies": [
       {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
       {"name":"themeier-rsync","version_requirement":">=0.6.0"},
-      {"name": "rmueller-cron","version_requirement":">=0.2.0"}
+      {"name":"rmueller-cron","version_requirement":">=0.2.0"},
+      {"name":"ghoneycutt-ssh","version_requirement":">=3.49.0"}
   ],
   "data_provider": null
 }

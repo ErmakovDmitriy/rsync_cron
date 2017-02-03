@@ -104,20 +104,21 @@ define rsync_cron::get (
     #Ensure_resource used to resolve 'duplicate resource' error.
     ensure_resource('file',"${::facts['home_dirs'][$execuser]}/.ssh/",{
       ensure => 'directory',
-      owner => $execuser,
-      mode => '0700',
+      owner  => $execuser,
+      mode   => '0700',
       })
     ensure_resource('file',"${::facts['home_dirs'][$execuser]}/.ssh/known_hosts",{
       ensure => 'file',
-      owner => $execuser,
-      mode => '0700',
+      owner  => $execuser,
+      mode   => '0700',
       })
 
     #Add ssh public keys
     each($known_hosts)|$key, $value|{
       file_line { "ssh_known_host ${key}":
-        line => $value,
-        path => "${::facts['home_dirs'][$execuser]}/.ssh/known_hosts",
+        ensure => $ensure,
+        line   => $value,
+        path   => "${::facts['home_dirs'][$execuser]}/.ssh/known_hosts",
       }
     }
   }

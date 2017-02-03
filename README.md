@@ -14,38 +14,23 @@
 
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
+This module manages rsync file copy tasks, which initiated with cron daemon.
+You can create copy task and this task will start on time.
 
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+This module are for simplier using rsync schedule.
+
+Module 'themeier-rsync' was the prototype for this module,
+but themeier-rsync starts with puppet agent apply action,
+not by more precise cron schedule.
+Also 'rsync_cron' manages ssh known_hosts file.
+
 
 ## Setup
 
-### What rsync_cron affects **OPTIONAL**
+This module installs: ssh client, cron daemon, rsync packages.
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+Dependencies: puppetlabs-stdlib, rmueller-cron, ghoneycutt-ssh, themeier-rsync.
 
-If there's more that they should know about, though, this is the place to mention:
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
 
 ### Beginning with rsync_cron
 
